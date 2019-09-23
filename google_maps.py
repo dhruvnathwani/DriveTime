@@ -27,8 +27,6 @@ def address_to_coordinates(address):
             dump = json.dumps(address_conversion)
             final = json.loads(dump)
 
-            #print(final)
-
             coordinates = final[0]['geometry']['location']
 
             latitude = coordinates['lat']
@@ -57,13 +55,7 @@ def get_drive_time(start_coordinates,end_coordinates,time):
 
     gmaps = googlemaps.Client(key = key)
 
-    #now = datetime.now()
-
     directions_result = gmaps.directions(start_coordinates,end_coordinates,departure_time=time)
-
-    #print(directions_result[0]['legs'][0]['distance']['text'])
-
-    #print(directions_result[0]['legs'][0]['duration']['text'])
 
     min = directions_result[0]['legs'][0]['duration']['text']
 
@@ -78,7 +70,6 @@ def next_weekday(weekday):
     if days_ahead <=0:
         days_ahead += 7
     return weekday + days_ahead
-#int(datetime.timedelta(days_ahead))
 
 def day_of_week_transaltor(day_of_week):
 
@@ -109,9 +100,7 @@ def time_selector():
             Time_you_want_to_arrive = Time_you_want_to_arrive_input.strftime("%I:%M %p")
 
             print("You want to arrive at: " + str(Time_you_want_to_arrive))
-
-
-            #Time_you_want_to_arrive = Time_you_want_to_arrive.time()
+            
             isvalid = True
         except:
             print("Please enter correct time in HHMM format")
