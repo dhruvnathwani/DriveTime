@@ -1,1 +1,4 @@
+git rm -r --cached .
+ git add .
+
 *config.py
