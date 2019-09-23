@@ -1,10 +1,5 @@
-#!/Library/Frameworks/Python.framework/Versions/3.6/bin/python3
-
 import googlemaps
 import datetime
-#from datetime import datetime
-#import geopy
-#from geopy.geocoders import Nominatim
 import json
 import time
 from textwrap import wrap
@@ -138,7 +133,7 @@ def time_selector():
     yday = int(datetime.datetime.today().timetuple().tm_yday)
     isdst = int(time.localtime().tm_isdst)
 
-    #print(isdst)
+    
 
     broken = wrap(str(Time_you_want_to_arrive_input),2)
 
@@ -146,16 +141,13 @@ def time_selector():
     minutes1 = str(broken[6].split(":")[1])
     minutes2 = str(broken[7].split(":")[0])
     minute = int(str(minutes1) + str(minutes2))
-    #print(minute)
+   
 
     t = (year,month,date,hour,minute,seconds,wday,yday,isdst)
 
-    #pattern = ("")
-    #Time_you_want_to_arrive_input = int(Time_you_want_to_arrive_input)
-    #Time_you_want_to_arrive = str(Time_you_want_to_arrive).split()[0]
-    #epoch = datetime.datetime(t).timestamp()
+    
     epoch = time.mktime(t)
-    #epoch = datetime.datetime.timestamp(Time_you_want_to_arrive_input)
+    
 
     current_epoch = time.time()
 
@@ -171,12 +163,7 @@ def time_selector():
 
         epoch = time.mktime(t)
 
-    #pattern = "%H:%M"
-    #Time_you_want_to_arrive = int(time.mktime(time.strptime(Time_you_want_to_arrive,pattern)))
-
-    #print(epoch)
-
-    #return Time_you_want_to_arrive
+  
 
     return epoch
 
@@ -228,26 +215,6 @@ end_coordinates = address_to_coordinates(end_address)
 
 
 
-#end_street_address = input("Please input the street address for your destination: ")
-#end_city = input("Please input the city for your destination: ")
-#end_state = input("Please input the state for your destination: ")
-#end_zip = input("Please input the zipcode for your destination: ")
-
-
-#end_address = str(end_street_address)+", "+str(end_city)+", "+str(end_state)+" "+str(end_zip)
-
-
-
-
-
-
-
-#validate_address(start_address)
-#validate_address(end_address)
-
-
-
-
 #Get time user wants to arrive and store that as arrival time
 arrival_time = time_selector()
 
@@ -256,8 +223,6 @@ arrival_time = time_selector()
 
 
 #Get the drive time assuming the person is leaving at the arrival time, this is just for establishing a baseline of how long to subtract from the departure time
-#start_coordinates = address_to_coordinates(start_address)
-#end_coordinates = address_to_coordinates(end_address)
 
 #it will take this many minutes to get to wok assuming you leave at the time you wanted to arrive
 baseline_drive_time = int(get_drive_time(start_coordinates,end_coordinates,arrival_time))
@@ -310,7 +275,6 @@ else:
 
 
 #Now show the exponential commute time growth as traffic increases
-#subtract 10 minutes from the perfect departure time, add to the departure time, one minute at a time, and record the drive time
 
 
 answer = input("Curious to see what the incremental traffic trends are like for your driving time within a certain window? Enter Y/N. ")
@@ -346,13 +310,9 @@ if str(answer).lower() == "y":
 
         modified_departure_time = modified_departure_time + datetime.timedelta(minutes = incremental)
 
-        #print(modified_departure_time)
-
         new_drive_time = int(get_drive_time(start_coordinates,end_coordinates, modified_departure_time))
 
         final_arrival_time = modified_departure_time + datetime.timedelta(minutes = new_drive_time)
-
-        #print(final_arrival_time)
 
         drive_times.append(new_drive_time)
         departure_times.append(modified_departure_time.strftime("%I:%M %p"))
